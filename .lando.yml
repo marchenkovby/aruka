@@ -1,11 +1,10 @@
 name: aruka
 recipe: lemp
 config:
-  via: nginx
-  config:
-    vhosts: .lando/nginx.conf
+  webroot: public
   php: '8.2'
   database: mysql
 services:
+  # Произвольное название для сервиса
   phpmyadmin:
     type: phpmyadmin
