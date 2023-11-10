@@ -1,7 +1,12 @@
 <?php
 
-echo 'test';
-//define('BASE_PATH', dirname(__DIR__));
+// router
+// logic
+// response
+
+print_r("<h1>Hello, World!</h1>");
+
+//define('BASE_PATH'ы, dirname(__DIR__));
 //
 //require_once BASE_PATH.'/vendor/autoload.php';
 //

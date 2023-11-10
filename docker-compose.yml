@@ -1,0 +1,44 @@
+version: '3.8'
+
+name: ${PROJECT_NAME}
+services:
+    app:
+        build: .
+        container_name: ${PROJECT_NAME}-app
+        restart: always
+        volumes:
+            - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+            - ./docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+            - ./:/var/www
+    nginx:
+        image: nginx:1.19-alpine
+        container_name: ${PROJECT_NAME}-nginx
+        restart: always
+        ports:
+        - '8030:80'
+        depends_on:
+            mysql:
+                condition: service_healthy
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx:/etc/nginx/conf.d
+    mysql:
+        container_name: ${PROJECT_NAME}-mysql
+        image: mysql:8.0
+        volumes:
+        - ./docker/storage/mysql:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASS}
+        healthcheck:
+            test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+            timeout: 20s
+            retries: 10
+        ports:
+        - '3308:3306'
+    adminer:
+        image: adminer
+        restart: always
+        container_name: ${PROJECT_NAME}-adminer
+        ports:
+          - '8031:8080'

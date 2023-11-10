@@ -1,3 +1,2 @@
-l.idea
-/vendor/
-.env
+.idea
+vendor

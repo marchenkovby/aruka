@@ -4,11 +4,12 @@ namespace Somecode\Framework\Http\Middleware;
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
-use function FastRoute\simpleDispatcher;
 use Somecode\Framework\Http\Exceptions\MethodNotAllowedException;
 use Somecode\Framework\Http\Exceptions\RouteNotFoundException;
 use Somecode\Framework\Http\Request;
 use Somecode\Framework\Http\Response;
+
+use function FastRoute\simpleDispatcher;
 
 class ExtractRouteInfo implements MiddlewareInterface
 {

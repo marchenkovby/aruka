@@ -1,20 +1,40 @@
 {
+    "name": "marchenkovby/aruka",
+    "type": "project",
+    "description": "PHP framework",
+    "keywords": [
+        "php",
+        "oop",
+        "mvc",
+        "mysql",
+        "pdo"
+    ],
+    "homepage": "https://aruka.marchenkov.by",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maksim Marchenkov",
+            "email": "marchenkovby@gmail.com",
+            "homepage": "https://marchenkov.by",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/marchenkovby/aruka/issues",
+        "source": "https://github.com/marchenkov/aruka"
+    },
   "autoload": {
-    "psr-4": {
-      "App\\": "app"
-    }
+        "psr-4": {
+            "App\\": "app",
+            "Framework\\": "framework"
+        }
   },
-  "repositories": [
-    {
-      "type": "path",
-      "url": "framework"
-    }
-  ],
   "require": {
-    "php": "^8.2"
+      "php": "^8.2",
+      "ext-pdo": "*"
   },
   "require-dev": {
-    "symfony/var-dumper": "^6.3",
-    "laravel/pint": "^1.10"
+      "symfony/var-dumper": "^6.3",
+      "laravel/pint": "^1.10"
   }
 }
