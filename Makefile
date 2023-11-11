@@ -13,4 +13,4 @@ sh:
 	docker exec -it $(CONTAINER_NAME) sh
 
 pint:
-	docker exec -it $(CONTAINER_NAME) ./vendor/bin/pint
+	docker exec -i $(CONTAINER_NAME) ./vendor/bin/pint

@@ -6,30 +6,37 @@ services:
         build: .
         container_name: ${PROJECT_NAME}-app
         restart: always
-        volumes:
-            - ./docker/php/php.ini:/usr/local/etc/php/php.ini
-            - ./docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
-            - ./:/var/www
-    nginx:
-        image: nginx:1.19-alpine
-        container_name: ${PROJECT_NAME}-nginx
-        restart: always
-        ports:
-        - '8030:80'
+        environment:
+            TZ: ${TIMEZONE}
         depends_on:
             mysql:
                 condition: service_healthy
         volumes:
-            - ./:/var/www
+            - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+            - ./docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+            - ./src:/var/www
+    nginx:
+        image: nginx:1.19-alpine
+        container_name: ${PROJECT_NAME}-nginx
+        restart: always
+        environment:
+            TZ: ${TIMEZONE}
+        ports:
+        - '8030:80'
+        depends_on:
+            - app
+        volumes:
+            - ./src:/var/www
             - ./docker/nginx:/etc/nginx/conf.d
     mysql:
         container_name: ${PROJECT_NAME}-mysql
         image: mysql:8.0
         volumes:
-        - ./docker/storage/mysql:/var/lib/mysql
+            - ./docker/storage/mysql:/var/lib/mysql
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: ${DB_PASS}
+            TZ: ${TIMEZONE}
         healthcheck:
             test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
             timeout: 20s
