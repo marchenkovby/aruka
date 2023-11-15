@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Http;
+namespace Aruka\Framework\Http;
 
 class Request
 {
@@ -35,5 +35,18 @@ class Request
         // Для чего использовать static, если это только влияет
         // на класс из которого вызывается?
         return new static($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
+    }
+
+    // Возвращает URI запроса без GET-параметров
+    public function getPath(): string
+    {
+        // С помощью strtok убирает все что идет после символа ?
+        return strtok($this->server['REQUEST_URI'], '?');
+    }
+
+    // Возвращает HTTP-метод запроса
+    public function getMethod(): string
+    {
+        return $this->server['REQUEST_METHOD'];
     }
 }
