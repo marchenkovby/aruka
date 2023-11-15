@@ -21,21 +21,7 @@ class Kernel
 
             foreach ($routes as $route) {
                 // Аналог $collector->addRoute($route[0], $route[1], $route[2]);
-                $collector->addRoute(...$route);
-            }
-
-            // Аналог $collector->addRoute('GET',  '/', function () {});
-            /*$collector->get('/', function () {
-                $content = '<h1>Hello, World!</h1>';
-
-                return new Response($content);
-            });
-
-            $collector->get('/posts/{id:\d+}', function (array $vars) {
-                $content = "<h1>Post - {$vars['id']}</h1>";
-
-                return new Response($content);
-            });*/
+                $collector->addRoute(...$route);}
         });
 
         // Проверяет совпадение URI и метода из запроса
@@ -49,11 +35,14 @@ class Kernel
         // NOT FOUND = 0, FOUND = 1, METHOD NOT ALLOWED = 2
         // $status = $routeInfo[0];
         // Получает 3 элемента массива и сразу заносит их в переменные
-        [$status, $handler, $vars] = $routeInfo;
+        //[$controller, $action] - чтобы отдельно в будущем иметь контроллер и экшин
+        [$status, [$controller, $method], $vars] = $routeInfo;
 
-        dd($handler);
+        // Т.к. переменная $controller содержит весь путь
+        // App\Controllers\HomeController, благодаря использованию
+        // HomeController:class в web.php
+        $response = (new $controller())->$method($vars);
 
-        // Возвращает неявно объект класса Response
-        return $handler($vars);
+        return $response;
     }
 }
