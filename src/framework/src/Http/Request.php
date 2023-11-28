@@ -7,10 +7,8 @@ namespace Aruka\Framework\Http;
 class Request
 {
     public function __construct(
-
         // К свойствам было добавлено readonly,
         // какой смысл если свойство private?
-
         // Данные из глобального массива $_GET
         private array $getParams,
 
@@ -32,8 +30,8 @@ class Request
     // $_GET, $_POST, $_COOKIE, $_FILES, $_SERVER
     public static function createFromGlobals(): static
     {
-        // Для чего использовать static, если это только влияет
-        // на класс из которого вызывается?
+        // Информация о разнице static и self
+        // https://ru.stackoverflow.com/a/494850
         return new static($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
     }
 
