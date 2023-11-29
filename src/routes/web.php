@@ -11,4 +11,5 @@ return [
     // [Метод, Маршрут,[Путь до класса контроллера, Метод контроллера]]
     //'/', App\Controllers\HomeController, 'index'
     Route::get('/', [HomeController::class, 'index']),
+    Route::put('/', [HomeController::class, 'index']),
 ];
