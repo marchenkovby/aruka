@@ -16,6 +16,7 @@ class Response
         // HTTP-заголовки ответа
         private readonly array $headers = []
     ) {
+        http_response_code($this->statusCode);
     }
 
     // Возвращает контент

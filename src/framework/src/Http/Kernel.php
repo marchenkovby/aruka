@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Aruka\Framework\Http;
 
+use Aruka\Framework\Http\Exceptions\HttpException;
 use Aruka\Framework\Routing\RouterInterface;
-use FastRoute\RouteCollector;
-
-use function FastRoute\simpleDispatcher;
 
 class Kernel
 {
     public function __construct(
         private RouterInterface $router
-    )
-    {
+    ) {
     }
 
     // Обрабывает запрос и возвращает ответ
@@ -25,9 +22,10 @@ class Kernel
 
             // Вызывает callback-функция с массивом параметров
             $response = call_user_func_array($routerHandler, $vars);
-
-        } catch (\Throwable $exception) {
-            $response = new Response($exception->getMessage(), 500);
+        } catch (HttpException $e) {
+            $response = new Response($e->getMessage(), $e->getStatusCode());
+        } catch (\Throwable $e) {
+            $response = new Response($e->getMessage(), 500);
         }
 
         return $response;

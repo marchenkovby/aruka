@@ -9,21 +9,24 @@ use Aruka\Framework\Http\Exceptions\RouteNotFoundException;
 use Aruka\Framework\Http\Request;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
+
 use function FastRoute\simpleDispatcher;
 
 class Router implements RouterInterface
 {
-
     public function dispatch(Request $request): array
     {
         [$handler, $vars] = $this->extractRouteInfo($request);
 
-        [$controller, $method] = $handler;
+        if (is_array($handler)) {
+            // Т.к. переменная $controller содержит весь путь
+            // App\Controllers\HomeController, благодаря использованию
+            // HomeController:class в web.php
+            [$controller, $method] = $handler;
+            $handler = [new $controller, $method];
+        }
 
-        // Т.к. переменная $controller содержит весь путь
-        // App\Controllers\HomeController, благодаря использованию
-        // HomeController:class в web.php
-        return [[new $controller, $method], $vars];
+        return [$handler, $vars];
     }
 
     // Возвращает информацию о совпадение URI и метода из запроса
@@ -65,9 +68,13 @@ class Router implements RouterInterface
             case Dispatcher::METHOD_NOT_ALLOWED:
                 // Объединяет элементы массива в строку
                 $allowedMethods = implode(', ', $routeInfo[1]);
-                throw new MethodNotAllowedException("Supported HTTP methods: $allowedMethods");
+                $exception = new MethodNotAllowedException("Supported HTTP methods: $allowedMethods");
+                $exception->setStatusCode(405);
+                throw $exception;
             default:
-                throw new RouteNotFoundException('Route not found');
+                $exception = new RouteNotFoundException('Route not found');
+                $exception->setStatusCode(404);
+                throw $exception;
         }
     }
 }
