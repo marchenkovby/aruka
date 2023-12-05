@@ -1,10 +1,8 @@
 {
-    "name": "marchenkovby/aruka",
+    "name": "marchenkovby/aruka-framework",
     "type": "project",
-    "description": "The application for the Aruka framework.",
+    "description": "A PHP framework",
     "keywords": [
-        "application",
-        "app",
         "php",
         "oop",
         "mvc",
@@ -25,23 +23,14 @@
         "issues": "https://github.com/marchenkovby/aruka/issues",
         "source": "https://github.com/marchenkov/aruka"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "App\\": "app"
+            "Aruka\\Framework\\": "src"
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "framework"
-        }
-    ],
     "require": {
         "php": "^8.2",
-        "marchenkovby/aruka-framework": "dev-main"
-    },
-    "require-dev": {
-        "symfony/var-dumper": "^6.3",
-        "laravel/pint": "^1.10"
+        "nikic/fast-route": "^1.3"
     }
 }

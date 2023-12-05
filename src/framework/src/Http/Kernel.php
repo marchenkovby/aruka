@@ -27,7 +27,6 @@ class Kernel
         } catch (\Throwable $e) {
             $response = new Response($e->getMessage(), 500);
         }
-
         return $response;
     }
 }
