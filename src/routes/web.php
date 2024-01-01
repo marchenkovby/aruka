@@ -9,8 +9,7 @@ use App\Controllers\PostController;
 use Aruka\Framework\Routing\Route;
 
 return [
-    // [Метод, Маршрут,[Путь до класса контроллера, Метод контроллера]]
-    //'/', App\Controllers\HomeController, 'index'
+    // (Метод, Маршрут,[Путь до класса контроллера, Метод контроллера])
     Route::get('/', [HomeController::class, 'index']),
     Route::get('/posts/{id:\d+}', [PostController::class, 'show']),
     Route::get('/hi/{name}', function ($name) {

@@ -1,36 +1,28 @@
 {
     "name": "marchenkovby/aruka-framework",
-    "type": "project",
-    "description": "A PHP framework",
-    "keywords": [
-        "php",
-        "oop",
-        "mvc",
-        "mysql",
-        "pdo"
-    ],
-    "homepage": "https://aruka.marchenkov.by",
-    "license": "MIT",
     "authors": [
         {
             "name": "Maksim Marchenkov",
-            "email": "marchenkovby@gmail.com",
-            "homepage": "https://marchenkov.by",
-            "role": "Developer"
+            "email": "marchenkovby@gmail.com"
         }
     ],
-    "support": {
-        "issues": "https://github.com/marchenkovby/aruka/issues",
-        "source": "https://github.com/marchenkov/aruka"
-    },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Aruka\\Framework\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Aruka\\Framework\\Tests\\": "tests"
+        }
+    },
     "require": {
         "php": "^8.2",
-        "nikic/fast-route": "^1.3"
+        "nikic/fast-route": "^1.3",
+        "psr/container": "^2.0@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0@dev"
     }
 }

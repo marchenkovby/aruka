@@ -14,3 +14,6 @@ sh:
 
 pint:
 	docker exec -i $(CONTAINER_NAME) ./vendor/bin/pint
+
+test:
+	docker exec -it $(CONTAINER_NAME) ./framework/vendor/bin/phpunit ./framework/tests --colors
