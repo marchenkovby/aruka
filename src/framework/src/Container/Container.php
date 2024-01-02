@@ -9,7 +9,7 @@ class Container implements ContainerInterface
 {
     private array $services = [];
 
-    public function add(string $id, string|object $concrete = null)
+    public function add(string $id, string|object $concrete = null): void
     {
         if (is_null($concrete)) {
             // Если $id не является классом
@@ -21,7 +21,7 @@ class Container implements ContainerInterface
         $this->services[$id] = $concrete;
     }
 
-    public function get(string $id)
+    public function get(string $id): object
     {
         return new $this->services[$id];
     }

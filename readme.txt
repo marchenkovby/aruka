@@ -7,4 +7,9 @@ composer init
 Установить библиотеку для dev
 composer require phpunit/phpunit --dev
 
+Решить проблему с иероглифами
+В файл .bashrc добавить строки
+LANG="ru_RU.UTF-8"; export LANG
+LC_ALL="ru_RU.UTF-8"; export LC_ALL
+
 Начать с 3 04s
