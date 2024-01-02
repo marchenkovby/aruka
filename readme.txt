@@ -7,4 +7,4 @@ composer init
 Установить библиотеку для dev
 composer require phpunit/phpunit --dev
 
-Начать с 3 03s
+Начать с 3 04s
