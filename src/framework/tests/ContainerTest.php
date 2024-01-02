@@ -36,4 +36,20 @@ class ContainerTest extends  TestCase
         $this->assertFalse($container->has('no-class'));
 
     }
+
+    public function test_recursively_autowired()
+    {
+        $container = new Container();
+
+        $container->add('aruka-class', ArukaClass::class);
+
+        /** @var ArukaClass $aruka $aruka */
+        $aruka = $container->get('aruka-class');
+
+        $arukaClassAnother = $aruka->getArukaClassAnother();
+
+        $this->assertInstanceOf(ArukaClassAnother::class,$aruka->getArukaClassAnother());
+        $this->assertInstanceOf(YouTube::class,$arukaClassAnother->getYoutube());
+        $this->assertInstanceOf(Telegram::class,$arukaClassAnother->getTelegram());
+    }
 }
