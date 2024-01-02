@@ -12,4 +12,4 @@ composer require phpunit/phpunit --dev
 LANG="ru_RU.UTF-8"; export LANG
 LC_ALL="ru_RU.UTF-8"; export LC_ALL
 
-Начать с 3 04s
+Начать с 4
